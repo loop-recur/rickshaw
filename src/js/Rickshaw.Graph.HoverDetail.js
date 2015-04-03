@@ -85,29 +85,31 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 			if (dataIndex < 0) dataIndex = 0;
 			var value = data[dataIndex];
 
-			var distance = Math.sqrt(
-				Math.pow(Math.abs(graph.x(value.x) - eventX), 2) +
-				Math.pow(Math.abs(graph.y(value.y + value.y0) - eventY), 2)
-			);
+      if(!value.anchor) {
+        var distance = Math.sqrt(
+          Math.pow(Math.abs(graph.x(value.x) - eventX), 2) +
+          Math.pow(Math.abs(graph.y(value.y + value.y0) - eventY), 2)
+        );
 
-			var xFormatter = series.xFormatter || this.xFormatter;
-			var yFormatter = series.yFormatter || this.yFormatter;
+        var xFormatter = series.xFormatter || this.xFormatter;
+        var yFormatter = series.yFormatter || this.yFormatter;
 
-			var point = {
-				formattedXValue: xFormatter(value.x),
-				formattedYValue: yFormatter(series.scale ? series.scale.invert(value.y) : value.y),
-				series: series,
-				value: value,
-				distance: distance,
-				order: j,
-				name: series.name
-			};
+        var point = {
+          formattedXValue: xFormatter(value.x),
+          formattedYValue: yFormatter(series.scale ? series.scale.invert(value.y) : value.y),
+          series: series,
+          value: value,
+          distance: distance,
+          order: j,
+          name: series.name
+        };
 
-			if (!nearestPoint || distance < nearestPoint.distance) {
-				nearestPoint = point;
-			}
+        if (!nearestPoint || distance < nearestPoint.distance) {
+          nearestPoint = point;
+        }
 
-			points.push(point);
+        points.push(point);
+      }
 
 		}, this );
 
