@@ -67,7 +67,10 @@ Rickshaw.Graph.Renderer.LinePlot = Rickshaw.Class.create( Rickshaw.Graph.Rendere
 				.enter().append("svg:circle")
 				.attr("cx", function(d) { return graph.x(d.x) })
 				.attr("cy", function(d) { return graph.y(d.y) })
-				.attr("r", function(d) { return ("r" in d) ? d.r : dotSize});
+				.attr("r", function(d) { return ("r" in d) ? d.r : dotSize})
+				.attr("class", function(d) { return d.anchor ? "anchor" : ""; });
+
+
 
 			Array.prototype.forEach.call(nodes[0], function(n) {
 				if (!n) return;
